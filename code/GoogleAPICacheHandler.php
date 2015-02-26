@@ -18,11 +18,11 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
 	 *
 	 */
 	public function get($key, $expiration = false) {
-		$item = GoogleAPICacheEntry::get()->filter('Key', $key)->first();
-		if (!$item) {
+		$entry = $this->getEntry($key);
+		if (!$entry) {
 			return null;
 		}
-		return $item->Value;
+		return $entry->Value;
 	}
 
 	/**
@@ -35,7 +35,7 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
 
 	public function set($key, $value) {
 		// if it's an existing key, we want to overwrite it.
-		$existing = $this->get($key);
+		$existing = $this->getEntry($key);
 
 		if (!$existing) {
 			// key doesn't exist, so create it.
@@ -53,9 +53,17 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
 	 * @param String $key
 	 */
 	public function delete($key) {
-		$existing = $this->get($key);
+		$existing = $this->getEntry($key);
 		if ($existing) {
 			$existing->delete();
 		}
+	}
+
+	/**
+	 * Return the GoogleAPICacheEntry for the specified Key. get() is part of the cache
+	 * API, and returns the value stored in the entry.
+	 */
+	protected function getEntry($key) {
+		return GoogleAPICacheEntry::get()->filter('Key', $key)->first();
 	}
 }
