@@ -29,8 +29,11 @@ The module supports two levels of configuration, via the SilverStripe configurat
       service_account: 'xxxxxxxxx-yyyyyy@developer.gserviceaccount.com'
       private_key_file: 'mysite/private/x.p12'
       scopes: 'https://www.googleapis.com/auth/analytics.readonly'
+      config_in_cms: 1
 
 Site config has corresponding properties under the Google API tab that if specified override these properties. The site config properties are prefixed GoogleAPI so as not to conflict with other site config properties that may be defined by extensions on other modules.
+
+The `config_in_cms` option allows you to control whether the Google API settings tab will appear under site configuration. You can disable it if you only want to configure the module via the config system.
 
 # Usage
 
