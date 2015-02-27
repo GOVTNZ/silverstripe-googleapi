@@ -22,6 +22,12 @@ class GoogleAPISiteConfigExtension extends DataExtension
 		// Get values from the config system, to act as placeholders for site config properties.
 		$config = Config::inst();
 
+		$editable = $config->get('GoogleAPI', 'config_in_cms');
+		if (!$editable) {
+			// No extra config fields if this is disabled.
+			return $fields;
+		}
+
 		$fields->addFieldToTab('Root.GoogleAPI', $fld = new TextField(
 			'GoogleAPIExternalProxy',
 			'Proxy to call external apis'

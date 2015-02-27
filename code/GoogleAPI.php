@@ -44,6 +44,11 @@ class GoogleAPI {
 	private static $profile_id;
 
 	/**
+	 * @config
+	 */
+	private static $config_in_cms = true;
+
+	/**
 	 * Returns an instance of Google_Client. Automatically handles set up of the
 	 * client, including:
 	 * - authentication using configuration in SiteConfig
@@ -113,6 +118,8 @@ class GoogleAPI {
 		if (!self::$_config_cache) {
 			$conf = array();
 
+			$editable = Config::inst()->get('GoogleAPI', 'config_in_cms');
+
 			$siteConfig = SiteConfig::current_site_config();
 			// $googleAPIConfig = Config::inst()->get('GoogleAPI');
 			// $googleAPIConfig = self::config();
@@ -130,18 +137,20 @@ class GoogleAPI {
 			}
 
 			// For any site config properties with values, these should override the
-			// config system.
-			foreach (array(
-				'GoogleAPIExternalProxy' => 'external_proxy',
-				'GoogleAPIClientID' => 'client_id',
-				'GoogleAPIApplicationName' => 'application_name',
-				'GoogleAPIServiceAccount' => 'service_account',
-				'GoogleAPIPrivateKeyFile' => 'private_key_file',
-				'GoogleAPIScopes' => 'scopes',
-				'GoogleAPIProfileID' => 'profile_id'
-				) as $src => $dest) {
-				if (!empty($siteConfig->$src)) {
-					$conf[$dest] = $siteConfig->$src;
+			// config system, but only if editing config in the CMS is enabled.
+			if ($editable) {
+				foreach (array(
+					'GoogleAPIExternalProxy' => 'external_proxy',
+					'GoogleAPIClientID' => 'client_id',
+					'GoogleAPIApplicationName' => 'application_name',
+					'GoogleAPIServiceAccount' => 'service_account',
+					'GoogleAPIPrivateKeyFile' => 'private_key_file',
+					'GoogleAPIScopes' => 'scopes',
+					'GoogleAPIProfileID' => 'profile_id'
+					) as $src => $dest) {
+					if (!empty($siteConfig->$src)) {
+						$conf[$dest] = $siteConfig->$src;
+					}
 				}
 			}
 
