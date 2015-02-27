@@ -63,7 +63,7 @@ class GoogleAPI {
 		if ($proxy) {
 			$io = $client->getIo();
 
-			$parts = TransportTools::decode_address($proxy, 'http', '80');
+			$parts = $this->decode_address($proxy, 'http', '80');
 
 			$io->setOptions(array(
 				CURLOPT_PROXY => $parts['Address'],
@@ -93,6 +93,23 @@ class GoogleAPI {
         $client->setCache(new GoogleAPICacheHandler());
 
 		return $client;
+	}
+
+	/**
+	 * Parse an address and return array of Protocol (scheme), Address, Port substituting defaults where not supplied.
+	 * 
+	 * @param string $address full address
+	 * @param string $defaultProtocol default to http if not in $address
+	 * @param string $defaultPort default to 80 if not in $address
+	 * @return array of Protocol, Address, Port
+	 */
+	protected function decode_address($address, $defaultProtocol = 'http', $defaultPort = '80') {
+		$parts = parse_url($address);
+		return array(
+			'Protocol' => empty($parts['scheme']) ? $defaultProtocol : $parts['scheme'],
+			'Address' => $parts['host'],
+			'Port' => empty($parts['port']) ? $defaultPort : $parts['port']
+		);
 	}
 
 	/**
