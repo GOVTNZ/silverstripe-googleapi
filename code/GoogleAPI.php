@@ -63,7 +63,7 @@ class GoogleAPI {
 		if ($proxy) {
 			$io = $client->getIo();
 
-			$parts = $this->decode_address($proxy, 'http', '80');
+			$parts = static::decode_address($proxy, 'http', '80');
 
 			$io->setOptions(array(
 				CURLOPT_PROXY => $parts['Address'],
@@ -103,7 +103,7 @@ class GoogleAPI {
 	 * @param string $defaultPort default to 80 if not in $address
 	 * @return array of Protocol, Address, Port
 	 */
-	protected function decode_address($address, $defaultProtocol = 'http', $defaultPort = '80') {
+	protected static function decode_address($address, $defaultProtocol = 'http', $defaultPort = '80') {
 		$parts = parse_url($address);
 		return array(
 			'Protocol' => empty($parts['scheme']) ? $defaultProtocol : $parts['scheme'],
