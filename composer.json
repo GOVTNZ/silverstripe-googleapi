@@ -13,6 +13,6 @@
 	],
 	"require": {
 		"silverstripe/framework": "*",
-		"google/apiclient": "1.0.*@beta"
+		"google/apiclient": "^1.1"
 	}
 }
