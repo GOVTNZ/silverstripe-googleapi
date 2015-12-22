@@ -90,7 +90,7 @@ class GoogleAPI {
 		$client->setAccessType('offline_access');
 
 		// Set up custom database cache handler.
-        $client->setCache(new GoogleAPICacheHandler());
+        $client->setCache(new GoogleAPICacheHandler($client));
 
 		return $client;
 	}
