@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+
 /**
  * Extend site config with the properties that can be used while interacting with Google API services. The
  * values here are consumed by GoogleAPI::get_all_config(), which merges it with configuration in the config
