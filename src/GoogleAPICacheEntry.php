@@ -1,5 +1,7 @@
 <?php
 
+namespace GovtNZ\SilverStripe\GoogleApi;
+
 use SilverStripe\ORM\DataObject;
 
 /**
@@ -11,4 +13,5 @@ class GoogleAPICacheEntry extends DataObject {
 		"Value" => "Text"
 	);
 
+    private static $table_name = 'GoogleAPICacheEntry';
 }

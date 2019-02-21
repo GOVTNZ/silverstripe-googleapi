@@ -1,8 +1,10 @@
 <?php
 
+namespace GovtNZ\SilverStripe\GoogleApi;
+
 /**
- * Simple class to provide convenient access to the Google API PHP client, as well as
- * configuration to be supplied to GoogleAPI.
+ * Simple class to provide convenient access to the Google API PHP client, as
+ * well as configuration to be supplied to GoogleAPI.
  */
 class GoogleAPI {
 	// The following properties are used by the configuration system. They should not be used directly
@@ -97,7 +99,7 @@ class GoogleAPI {
 
 	/**
 	 * Parse an address and return array of Protocol (scheme), Address, Port substituting defaults where not supplied.
-	 * 
+	 *
 	 * @param string $address full address
 	 * @param string $defaultProtocol default to http if not in $address
 	 * @param string $defaultPort default to 80 if not in $address

@@ -11,7 +11,7 @@ Google API PHP Client from
 To include the module using composer, add the following to your requirements in composer.json:
 
     "require": {
-        "govtnz/googleapi": "dev-master",
+        "govtnz/silverstripe-googleapi": "dev-master",
     }
 
 ## Manually
@@ -22,7 +22,7 @@ You can clone or download the module from [googleapi on github](https://github.c
 
 The module supports two levels of configuration, via the SilverStripe configuration system, and also via a SiteConfig extension. The following properties can be defined in your site's config.yml:
 
-    GoogleAPI:
+    GovtNZ\SilverStripe\GoogleApi\GoogleAPI:
       client_id: 'xyz.apps.googleusercontent.com'
       profile_id: 'ga:xxxxxxxx'
       application_name: 'app name'

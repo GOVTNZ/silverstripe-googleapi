@@ -1,18 +1,26 @@
 {
-	"name": "GOVTNZ/googleapi",
-	"description": "A minimal library for integration of Google services",
-	"type": "silverstripe-module",
-	"homepage": "http://github.com/GOVTNZ/googleapi",
-	"keywords": ["silverstripe", "google"],
-	"license": "BSD-3-Clause",
-	"authors": [
-		{
-			"name": "Mark Stephens",
-			"email": "mr.morphic@gmail.com"
-		}
-	],
-	"require": {
-		"silverstripe/framework": "*",
-		"google/apiclient": "1.0.*@beta"
-	}
+    "name": "govtnz/silverstripe-googleapi",
+    "description": "A minimal library for integration of Google services",
+    "type": "silverstripe-vendormodule",
+    "homepage": "http://github.com/GOVTNZ/googleapi",
+    "keywords": ["silverstripe", "google"],
+    "license": "BSD-3-Clause",
+    "authors": [{
+      "name": "Govt.nz",
+      "email": "govtnz@dia.govt.nz"
+    }],
+    "require": {
+        "silverstripe/framework": "^4",
+        "silverstripe/cms": "^4"
+    },
+    "autoload": {
+        "psr-4": {
+            "GovtNZ\\SilverStripe\\GoogleApi\\": "src"
+        }
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-master": "2.x-dev"
+      }
+    }
 }
