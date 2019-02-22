@@ -5,6 +5,7 @@ namespace GovtNZ\SilverStripe\GoogleApi;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Core\Config\Config;
 
 /**
  * Extend site config with the properties that can be used while interacting

@@ -4,4 +4,4 @@ Name: GoogleAPI
 
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - GoogleAPISiteConfigExtension
+    - GovtNZ\SilverStripe\GoogleApi\GoogleAPISiteConfigExtension
