@@ -2,6 +2,12 @@
 
 namespace GovtNZ\SilverStripe\GoogleApi;
 
+use Google_Client;
+use Google_Auth_AssertionCredentials;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Control\Director;
+
 /**
  * Simple class to provide convenient access to the Google API PHP client, as
  * well as configuration to be supplied to GoogleAPI.
@@ -66,11 +72,11 @@ class GoogleAPI
         $client = new Google_Client();
 
         // If we are going through a proxy, set that up
-        $proxy = static::get_config('external_proxy');
+        $proxy = self::get_config('external_proxy');
         if ($proxy) {
             $io = $client->getIo();
 
-            $parts = static::decode_address($proxy, 'http', '80');
+            $parts = self::decode_address($proxy, 'http', '80');
 
             $io->setOptions(array(
                 CURLOPT_PROXY => $parts['Address'],
@@ -78,18 +84,18 @@ class GoogleAPI
             ));
         }
 
-        $client->setClientId(static::get_config('client_id'));
-        $client->setApplicationName(static::get_config('application_name'));
+        $client->setClientId(self::get_config('client_id'));
+        $client->setApplicationName(self::get_config('application_name'));
 
         // absolute if starts with '/' otherwise relative to site root
-        $keyPathName = static::get_config('private_key_file');
+        $keyPathName = self::get_config('private_key_file');
         if (substr($keyPathName, 0, 1) !== '/') {
             $keyPathName = Director::baseFolder() . "/" . $keyPathName;
         }
 
         $client->setAssertionCredentials(new Google_Auth_AssertionCredentials(
-            static::get_config('service_account'),
-            explode(',', static::get_config('scopes')),
+            self::get_config('service_account'),
+            explode(',', self::get_config('scopes')),
             file_get_contents($keyPathName)
         ));
 
@@ -102,7 +108,8 @@ class GoogleAPI
     }
 
     /**
-     * Parse an address and return array of Protocol (scheme), Address, Port substituting defaults where not supplied.
+     * Parse an address and return array of Protocol (scheme), Address, Port
+     * substituting defaults where not supplied.
      *
      * @param string $address full address
      * @param string $defaultProtocol default to http if not in $address
@@ -112,6 +119,7 @@ class GoogleAPI
     protected static function decode_address($address, $defaultProtocol = 'http', $defaultPort = '80')
     {
         $parts = parse_url($address);
+
         return array(
             'Protocol' => empty($parts['scheme']) ? $defaultProtocol : $parts['scheme'],
             'Address' => $parts['host'],
@@ -120,15 +128,20 @@ class GoogleAPI
     }
 
     /**
-     * Helper function to get a configuration property. If the property is not defined in the configuration,
-     * null is returned. Configuration is obtained from get_all_config.
+     * Helper function to get a configuration property. If the property is not
+     * defined in the configuration, null is returned. Configuration is
+     * obtained from get_all_config.
+     *
+     * @param string $prop
      */
     public static function get_config($prop)
     {
-        $conf = static::get_all_config();
+        $conf = self::get_all_config();
+
         if (!isset($conf[$prop])) {
             return null;
         }
+
         return $conf[$prop];
     }
 
@@ -142,11 +155,9 @@ class GoogleAPI
         if (!self::$config_cache) {
             $conf = array();
 
-            $editable = Config::inst()->get('GoogleAPI', 'config_in_cms');
+            $editable = Config::inst()->get(self::class, 'config_in_cms');
 
             $siteConfig = SiteConfig::current_site_config();
-            // $googleAPIConfig = Config::inst()->get('GoogleAPI');
-            // $googleAPIConfig = self::config();
 
             // Default the result properties from the config system.
             foreach (array(
@@ -157,7 +168,7 @@ class GoogleAPI
                 'service_account',
                 'profile_id',
                 'scopes') as $prop) {
-                $conf[$prop] = Config::inst()->get('GoogleAPI', $prop);
+                $conf[$prop] = Config::inst()->get(self::class, $prop);
             }
 
             // For any site config properties with values, these should override the

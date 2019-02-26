@@ -9,10 +9,10 @@ use SilverStripe\ORM\DataObject;
  */
 class GoogleAPICacheEntry extends DataObject
 {
-    private static $db = array(
+    private static $db = [
         "Key" => "Text",
         "Value" => "Text"
-    );
+    ];
 
     private static $table_name = 'GoogleAPICacheEntry';
 }

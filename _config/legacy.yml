@@ -1,0 +1,6 @@
+---
+Name: silverstripe-googleapilegacy
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    GoogleAPICacheEntry: 'GovtNZ\SilverStripe\GoogleApi\GoogleAPICacheEntry'
