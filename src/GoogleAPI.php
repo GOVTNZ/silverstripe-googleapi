@@ -111,9 +111,9 @@ class GoogleAPI
      * Parse an address and return array of Protocol (scheme), Address, Port
      * substituting defaults where not supplied.
      *
-     * @param string $address full address
+     * @param string $address         full address
      * @param string $defaultProtocol default to http if not in $address
-     * @param string $defaultPort default to 80 if not in $address
+     * @param string $defaultPort     default to 80 if not in $address
      * @return array of Protocol, Address, Port
      */
     protected static function decode_address($address, $defaultProtocol = 'http', $defaultPort = '80')

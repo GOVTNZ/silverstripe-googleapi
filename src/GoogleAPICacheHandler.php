@@ -19,8 +19,8 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
      * Retrieves the data for the given key, or false if they
      * key is unknown or expired
      *
-     * @param String $key The key who's data to retrieve
-     * @param boolean|int $expiration Expiration time in seconds
+     * @param string          $key        The key who's data to retrieve
+     * @param boolean|integer $expiration Expiration time in seconds
      *
      */
     public function get($key, $expiration = false)
@@ -36,7 +36,7 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
      * Store the key => $value set. The $value is serialized
      * by this function so can be of any type.
      *
-     * @param string $key Key of the data
+     * @param string $key   Key of the data
      * @param string $value data
      */
 
@@ -58,7 +58,7 @@ class GoogleAPICacheHandler extends Google_Cache_Abstract
     /**
      * Removes the key/data pair for the given $key
      *
-     * @param String $key
+     * @param string $key
      */
     public function delete($key)
     {
