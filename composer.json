@@ -10,13 +10,13 @@
       "email": "govtnz@dia.govt.nz"
     }],
     "require": {
-        "silverstripe/framework": "^4",
-        "silverstripe/cms": "^4",
+        "silverstripe/framework": "^5",
+        "silverstripe/cms": "^5",
         "google/apiclient": "^1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "squizlabs/php_codesniffer": "^3.4"
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
